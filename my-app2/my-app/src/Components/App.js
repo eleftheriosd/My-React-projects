@@ -1,40 +1,40 @@
-import React from "react"
-import TodoItem from "./TodoItem"
-import todosData from "./todosData"
+// import React from "react"
+// import TodoItem from "./TodoItem"
+// import todosData from "./todosData"
 
 
-class App extends React.Component {
-    constructor(){
-        super()
-        this.state={
-            todos: todosData
-        }
-        this.handleChange=this.handleChange.bind(this)
-    }
-    handleChange(id){
-        this.setState(prevState=>{
-            const updated=prevState.todos.map(todo=>{
-                if(todo.id===id){
-                    todo.completed= !todo.completed
-                }
-                return todo;
-            })
-            return {
-                todos: updated
-            }
-        })
-    }
-    render() {
-        // console.log(this.state.todos);
-        const ToDoItems=this.state.todos.map(item => <TodoItem key={item.id} item={item} handleChange={this.handleChange} />)
-        return (
-            <div className="todo-list">
-            {ToDoItems}
-            </div>
-        )
-    }
-}
-export default App
+// class App extends React.Component {
+//     constructor(){
+//         super()
+//         this.state={
+//             todos: todosData
+//         }
+//         this.handleChange=this.handleChange.bind(this)
+//     }
+//     handleChange(id){
+//         this.setState(prevState=>{
+//             const updated=prevState.todos.map(todo=>{
+//                 if(todo.id===id){
+//                     todo.completed= !todo.completed
+//                 }
+//                 return todo;
+//             })
+//             return {
+//                 todos: updated
+//             }
+//         })
+//     }
+//     render() {
+//         // console.log(this.state.todos);
+//         const ToDoItems=this.state.todos.map(item => <TodoItem key={item.id} item={item} handleChange={this.handleChange} />)
+//         return (
+//             <div className="todo-list">
+//             {ToDoItems}
+//             </div>
+//         )
+//     }
+// }
+// export default App
 
 // // import React from "react"
 
@@ -162,3 +162,180 @@ export default App
 // }
 
 // export default App
+
+// import React, {Component} from "react"
+
+// https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch
+// https://swapi.co/
+// https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261
+
+// class App extends Component {
+//     constructor() {
+//         super()
+//         this.state = {
+//             loading: false,
+//             character: {}
+//         }
+//     }
+    
+//     componentDidMount() {
+//         this.setState({
+//             loading: true
+//         })
+//         fetch("https://swapi.co/api/people/1")
+//             .then(response => response.json())
+//             .then(data =>{
+//                     this.setState({
+//                         character:data,
+//                         loading: false
+//                     })
+//             })
+//     }
+    
+//     render() {
+//         const text =this.state.loading? "loading..." : this.state.character.name
+//         return (
+//             <div>
+//                 {text}
+//             </div>
+//         )
+//     }
+// }
+
+// export default App
+
+
+import React, {Component} from "react"
+
+/**
+ * Challenge: Wire up the partially-finished travel form so that it works!
+ * Remember to use the concept of controlled forms
+ * https://reactjs.org/docs/forms.html
+ * 
+ * All information should be populating the text below the form in real-time
+ * as you're filling it out
+ * 
+ * This exercise is adapted from the V School curriculum on vanilla JS forms:
+ * https://coursework.vschool.io/travel-form/
+ * 
+ * All of our challenges and learning resources are open for the public
+ * to play around with and learn from at https://coursework.vschool.io
+ */
+
+class App extends Component {
+    constructor() {
+        super()
+        this.state = {
+            firstName:"",
+            lastName:"",
+            Age:"",
+            gender:"",
+            country:"",
+                isVegan: false,
+                isKosher: false,
+                isLactosefree: false
+        }
+        this.handleChange=this.handleChange.bind(this)
+    }
+    
+    handleChange(event){
+        const{name, value,type,checked}=event.target
+        type==="checkbox"? this.setState({[name]: checked}):this.setState({ [name] : value })
+    }
+
+    render() {
+        return (
+            <main>
+                <form>
+                    <input 
+                    type="text"
+                    name="firstName"
+                    placeholder="First Name" 
+                    onChange={this.handleChange}
+                    />
+                    <br />
+                    <input 
+                    type="text"
+                    name="lastName"
+                    placeholder="Last Name" 
+                    onChange={this.handleChange}
+                    />
+                    <br />
+                    <input 
+                    type="text"
+                    name="Age"
+                    placeholder="Age" 
+                    onChange={this.handleChange}
+                    />
+                    <br />
+                    <input
+                    type="radio"
+                    name="gender"
+                    value="Male"
+                    checked={this.state.gender==="male"}
+                    onChange={this.handleChange}
+                    />Male
+                    <input
+                    type="radio"
+                    name="gender"
+                    value="Female"
+                    checked={this.state.gender==="female"}
+                    onChange={this.handleChange}
+                    />Female
+                    {/* Create radio buttons for gender here */}
+                    <br />
+                    <label>
+                    <select
+                    value={this.state.country}
+                    onChange={this.handleChange}
+                    name="country"
+                    >
+                    <option value ="Greece">Greece</option>
+                    <option value ="Italy">Italy</option>
+                    <option value ="Spain">Spain</option>
+                    </select>
+                    </label>
+                    {/* Create select box for location here */}
+                    <br />
+                    <label>
+                    Dietary restrictions 
+                    <input 
+                        type="checkbox"
+                        name="isVegan"
+                        onChange={this.handleChange} 
+                        checked={this.state.isVegan}
+                    />Vegan?
+                    <input 
+                        type="checkbox"
+                        name="isKosher"
+                        onChange={this.handleChange} 
+                        checked={this.state.isKosher}
+                    />Kosher?
+                    <input 
+                        type="checkbox"
+                        name="isLactoseFree"
+                        onChange={this.handleChange} 
+                        checked={this.state.isLactoseFree}
+                    />Lactose Free?
+                    {/* Create check boxes for dietary restrictions here */}
+                    <br />
+                    </label>
+                    <button>Submit</button>
+                </form>
+                <hr />
+                <h2>Entered information:</h2>
+                <p>Your name: {this.state.firstName} {this.state.lastName}</p>
+                <p>Your age: {this.state.age}</p>
+                <p>Your gender: {this.state.gender}</p>
+                <p>Your destination: {this.state.destination}</p>
+                <p>Your dietary restrictions:</p>
+                
+                <p>Vegan: {this.state.isVegan ? "Yes" : "No"}</p>
+                <p>Kosher: {this.state.isKosher ? "Yes" : "No"}</p>
+                <p>Lactose Free: {this.state.isLactoseFree ? "Yes" : "No"}</p>
+            </main>
+        )
+    }
+}
+
+export default App
