@@ -10,7 +10,6 @@ function TodoItem(props) {
     return (
         <div className="todo-item">
             <input 
-            //hi
             type="checkbox"
             onChange={()=>props.handleChange(props.item.id)}
             checked={props.item.completed}/>
