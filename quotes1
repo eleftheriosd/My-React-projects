@@ -1,5 +1,4 @@
-[
-    {
+{
         "id": 0,
         "name": "Dr. Seuss",
         "quote":"Don't cry because it's over, smile because it happened."
@@ -34,4 +33,3 @@
         "name": "Mark Twain",
         "quote":"If you tell the truth, you don't have to remember anything."
      }
-  ]
